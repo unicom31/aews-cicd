@@ -1,5 +1,7 @@
 FROM ubuntu:20.04
-ENV TZ=Asia/Seoul VERSION=v2.0 NAME=admin
+
+ENV TZ=Asia/Seoul VERSION=v3.0 NAME=admin
+
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list && \
     sed -i 's/security.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list && \
@@ -8,5 +10,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
     echo "<pre>" >> /var/www/html/index.html && \
     figlet AEWS Study >> /var/www/html/index.html && \
     echo "</pre>" >> /var/www/html/index.html
+	
 EXPOSE 80
+
 CMD ["usr/sbin/apache2ctl", "-DFOREGROUND"]
